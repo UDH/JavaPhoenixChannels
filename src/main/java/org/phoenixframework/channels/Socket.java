@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 public class Socket {
     private static final Logger LOG = Logger.getLogger(Socket.class.getName());
 
-    public static final int RECONNECT_INTERVAL_MS = 5000;
+    public static final int DEFAULT_RECONNECT_INTERVAL = 5000;
 
     private static final int DEFAULT_HEARTBEAT_INTERVAL = 7000;
 
@@ -191,7 +191,7 @@ public class Socket {
                 }
             }
         };
-        timer.schedule(Socket.this.reconnectTimerTask, RECONNECT_INTERVAL_MS);
+        timer.schedule(Socket.this.reconnectTimerTask, Socket.this.reconnectInterval);
     }
 
     private void cancelReconnectTimer() {
@@ -201,7 +201,7 @@ public class Socket {
     }
 
     public Socket(final String endpointUri) throws IOException {
-        this(endpointUri, DEFAULT_HEARTBEAT_INTERVAL);
+        this(endpointUri, DEFAULT_HEARTBEAT_INTERVAL, DEFAULT_RECONNECT_INTERVAL);
     }
 
     public Socket(final String endpointUri, final int heartbeatIntervalInMs, final int reconnectIntervalInMs) throws IOException {
