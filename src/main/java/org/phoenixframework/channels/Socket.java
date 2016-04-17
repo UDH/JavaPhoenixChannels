@@ -209,7 +209,6 @@ public class Socket {
         this.endpointUri = endpointUri;
         this.heartbeatInterval = heartbeatIntervalInMs;
         this.reconnectInterval = reconnectIntervalInMs;
-        this.recon
         this.timer = new Timer("Reconnect Timer for " + endpointUri);
     }
 
