@@ -38,6 +38,7 @@ public class Socket {
     private String endpointUri = null;
     private final List<Channel> channels = new ArrayList<>();
     private int heartbeatInterval;
+    private int reconnectInterval;
     private boolean reconnectOnFailure = true;
 
     private Timer timer = null;
@@ -163,7 +164,7 @@ public class Socket {
             }
         };
 
-        timer.schedule(Socket.this.heartbeatTimerTask, Socket.this.heartbeatInterval, Socket.this.heartbeatInterval);
+        timer.schedule(Socket.this.heartbeatTimerTask, Socket.this.heartbeatInterval, Socket.this.reconnectInterval);
     }
 
     private void cancelHeartbeatTimer(){
@@ -203,10 +204,12 @@ public class Socket {
         this(endpointUri, DEFAULT_HEARTBEAT_INTERVAL);
     }
 
-    public Socket(final String endpointUri, final int heartbeatIntervalInMs) throws IOException {
+    public Socket(final String endpointUri, final int heartbeatIntervalInMs, final int reconnectIntervalInMs) throws IOException {
         LOG.log(Level.FINE, "PhoenixSocket({0})", endpointUri);
         this.endpointUri = endpointUri;
         this.heartbeatInterval = heartbeatIntervalInMs;
+        this.reconnectInterval = reconnectIntervalInMs;
+        this.recon
         this.timer = new Timer("Reconnect Timer for " + endpointUri);
     }
 
