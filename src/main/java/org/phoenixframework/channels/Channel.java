@@ -265,7 +265,7 @@ public class Channel {
                 }
             }
         };
-        scheduleRepeatingTask(rejoinTimerTask, Socket.RECONNECT_INTERVAL_MS);
+        scheduleRepeatingTask(rejoinTimerTask, this.socket.reconnectInterval);
     }
 
 
