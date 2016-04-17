@@ -38,7 +38,7 @@ public class Socket {
     private String endpointUri = null;
     private final List<Channel> channels = new ArrayList<>();
     private int heartbeatInterval;
-    private int reconnectInterval;
+    public int reconnectInterval;
     private boolean reconnectOnFailure = true;
 
     private Timer timer = null;
